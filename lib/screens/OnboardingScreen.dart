@@ -137,7 +137,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ],
                           ));
 
-                  // return;
+                  return;
                 }
                 _singIn();
               },
