@@ -1,28 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mob_dev_final/screens/HomeScreen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class OnboardingScreen extends StatefulWidget {
-
-  const  OnboardingScreen({Key? key}) : super(key: key);
+  const OnboardingScreen({Key? key}) : super(key: key);
 
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   void _register() async {
-    final User? user = (
-        await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text)
-    ).user;
+    final User? user = (await _auth.createUserWithEmailAndPassword(
+            email: _emailController.text, password: _passwordController.text))
+        .user;
 
-    if(user != null) {
+    if (user != null) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => OnboardingScreen()),
@@ -31,10 +30,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _singIn() async {
-    final User? user = (await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text)).user;
+    final User? user = (await _auth.signInWithEmailAndPassword(
+            email: _emailController.text, password: _passwordController.text))
+        .user;
 
-    if(user != null) {
-      print("hello");
+    if (user != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
     }
   }
 
@@ -49,7 +53,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void dispose() {
     super.dispose();
   }
-
 
   Widget _renderSignIn() {
     return Container(
@@ -111,31 +114,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 22.0
-                ),
+                    fontSize: 22.0),
               ),
               onPressed: () async {
                 final email = _emailController.text;
                 final password = _passwordController.text;
 
                 if (email.isEmpty || password.isEmpty) {
-                  showDialog(context: context, builder: (_) => AlertDialog(
-                    title: const Text('Error'),
-                    content: const Text('Please enter your email and password'),
-                    actions: [
-                      TextButton(
-                        child: const Text('OK'),
-                        onPressed: () =>  Navigator.of(context, rootNavigator: true).pop('dialog'),
-                      )
-                    ],
-                  ));
+                  showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text(
+                                'Please enter your email and password'),
+                            actions: [
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () =>
+                                    Navigator.of(context, rootNavigator: true)
+                                        .pop('dialog'),
+                              )
+                            ],
+                          ));
 
-                  return;
+                  // return;
                 }
-
                 _singIn();
-
-
               },
             ),
           ),
@@ -239,8 +243,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 22.0
-                ),
+                    fontSize: 22.0),
               ),
               onPressed: () async {
                 final name = _nameController.text;
@@ -248,16 +251,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 final password = _passwordController.text;
 
                 if (email.isEmpty || password.isEmpty) {
-                  showDialog(context: context, builder: (_) => AlertDialog(
-                    title: const Text('Error'),
-                    content: const Text('Please enter your email and password'),
-                    actions: [
-                      TextButton(
-                        child: const Text('OK'),
-                        onPressed: () => Navigator.of(context, rootNavigator: true).pop('dialog'),
-                      )
-                    ],
-                  ));
+                  showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text(
+                                'Please enter your email and password'),
+                            actions: [
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () =>
+                                    Navigator.of(context, rootNavigator: true)
+                                        .pop('dialog'),
+                              )
+                            ],
+                          ));
 
                   return;
                 }
@@ -295,7 +303,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
 
-
     _emailController.text = "";
 
     return Scaffold(
@@ -306,7 +313,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             _renderSignIn(),
             _renderSignUp(),
           ],
-        )
-    );
+        ));
   }
 }

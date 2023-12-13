@@ -22,14 +22,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: Container(
           height: 40,
-          child: Image.asset('assets/netflixLogo.png'),
+          child: Image.asset('../../assets/netflixLogo.png'),
         ),
         centerTitle: true,
         actions: [
           Container(
             padding: EdgeInsets.all(10),
             height: 40,
-            child: Image.asset('assets/neflixPP.jpg'),
+            child: Image.asset('../../assets/neflixPP.jpg'),
           ),
         ],
         elevation: 0.0,
