@@ -62,7 +62,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Image.asset("../../assets/netflix_logo1.png", width: 200),
+            child: Image.asset('../../assets/netflix_logo1.png', width: 200),
           ),
           const SizedBox(height: 60),
           TextField(
@@ -139,6 +139,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                   return;
                 }
+
                 _singIn();
               },
             ),
